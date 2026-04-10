@@ -61,10 +61,10 @@ export default function StudentNetwork() {
             </p>
           </div>
           <div className="flex gap-2">
-            <button onClick={() => scroll("left")} className="w-12 h-12 rounded-full border border-gray-100 flex items-center justify-center hover:bg-gray-50 transition-colors">
+            <button onClick={() => scroll("left")} className="w-12 h-12 rounded-full border border-gray-100 flex items-center justify-center hover:bg-gray-50 transition-colors" aria-label="Scroll left">
               <ChevronLeft size={20} className="text-gray-400" />
             </button>
-            <button onClick={() => scroll("right")} className="w-12 h-12 rounded-full border border-gray-100 flex items-center justify-center hover:bg-gray-50 transition-colors">
+            <button onClick={() => scroll("right")} className="w-12 h-12 rounded-full border border-gray-100 flex items-center justify-center hover:bg-gray-50 transition-colors" aria-label="Scroll right">
               <ChevronRight size={20} className="text-gray-400" />
             </button>
           </div>
@@ -95,19 +95,31 @@ export default function StudentNetwork() {
           <AnimatePresence mode="wait">
             <motion.div
               key={activeTab}
-              initial={{ opacity: 0, x: 10 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -10 }}
-              transition={{ duration: 0.6, ease: smoothEase }}
+              initial="hidden"
+              animate="visible"
+              exit="hidden"
+              variants={{
+                visible: { transition: { staggerChildren: 0.1 } },
+                hidden: { transition: { staggerChildren: 0.05, staggerDirection: -1 } }
+              }}
               className="contents"
             >
               {allStudents[activeTab].map((student, i) => (
                 <motion.div
                   key={student.name}
+                  variants={{
+                    hidden: { opacity: 0, y: 20 },
+                    visible: { opacity: 1, y: 0 }
+                  }}
+                  transition={{ duration: 0.6, ease: smoothEase }}
                   className="group flex flex-col cursor-pointer"
                 >
                   <div className="relative mb-6 aspect-[4/5] bg-gray-50 overflow-hidden rounded-none">
-                    <img src={student.img} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" />
+                    <img 
+                      src={student.img} 
+                      alt={`Portrait of ${student.name}`} 
+                      className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" 
+                    />
                     <div className="absolute top-4 right-4 h-8 w-8 bg-white/20 backdrop-blur-md rounded-none flex items-center justify-center">
                        <BadgeCheck size={18} className="text-[#a3e635]" />
                     </div>
@@ -125,14 +137,24 @@ export default function StudentNetwork() {
                   </div>
 
                   <div className="mt-auto flex items-center justify-between pt-6 border-t border-gray-50">
-                    <img src={student.logo} className="h-4 grayscale opacity-40 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-500" />
+                    <img 
+                      src={student.logo} 
+                      alt={`${student.uni} logo`} 
+                      className="h-4 grayscale opacity-40 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-500" 
+                    />
                     <Star size={14} className="text-gray-100 group-hover:text-[#a3e635] transition-colors" />
                   </div>
                 </motion.div>
               ))}
 
               {/* CTA CARD */}
-              <div className="bg-[#003fa3] text-white p-10 flex flex-col justify-between rounded-none shadow-2xl relative overflow-hidden group">
+              <motion.div 
+                variants={{
+                  hidden: { opacity: 0, scale: 0.95 },
+                  visible: { opacity: 1, scale: 1 }
+                }}
+                className="bg-[#003fa3] text-white p-10 flex flex-col justify-between rounded-none shadow-2xl relative overflow-hidden group"
+              >
                  <div className="relative z-10">
                     <h3 className="text-2xl font-light font-poppins leading-tight tracking-tight mb-4">
                       Explore 500+ More <br/> <span className="font-bold text-[#a3e635]">{activeTab}</span> Experts
@@ -145,11 +167,10 @@ export default function StudentNetwork() {
                       Join the Network
                     </button>
                  </div>
-                 {/* Decorative background logo */}
                  <div className="absolute -bottom-10 -right-10 opacity-5 group-hover:opacity-10 transition-opacity">
-                    <Globe size={200} />
+                    <Globe size={200} alt="" />
                  </div>
-              </div>
+              </motion.div>
             </motion.div>
           </AnimatePresence>
         </div>

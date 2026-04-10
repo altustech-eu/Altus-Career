@@ -4,6 +4,7 @@ import { gsap } from "gsap";
 import { Download, ChevronLeft, ChevronRight, Loader2, ArrowLeft } from "lucide-react";
 import { useNavigate, Link } from "react-router-dom";
 
+
 // --- DATA GENERATOR ---
 const generatePages = () => {
   const categories = ["Medical", "Technology", "Engineering", "Services", "Artisan", "Finance"];
@@ -37,7 +38,7 @@ export default function RealBookUI() {
   const flipPageRef = useRef(null);
   const navigate = useNavigate();
 
-  // Custom luxury ease for the "smoothie" flow
+  // Luxury ease for the "smoothie" flow
   const luxuryEase = [0.22, 1, 0.36, 1];
 
   const triggerRealDownload = (id, title) => {
@@ -63,12 +64,18 @@ export default function RealBookUI() {
       const tl = gsap.timeline({
         onComplete: () => {
           setCurrentIndex(prev => prev + 1);
-          gsap.set(flipPageRef.current, { rotateY: 0, display: "none" });
+          gsap.set(flipPageRef.current, { rotateY: 0, display: "none", z: 0 });
           setIsAnimating(false);
         }
       });
-      gsap.set(flipPageRef.current, { display: "block", rotateY: 0 });
-      tl.to(flipPageRef.current, { rotateY: -180, duration: 0.8, ease: "power2.inOut", transformOrigin: "left center" });
+      gsap.set(flipPageRef.current, { display: "block", rotateY: 0, z: 0 });
+      tl.to(flipPageRef.current, { 
+        rotateY: -180, 
+        z: 40, // Smoothie lift
+        duration: 0.9, 
+        ease: "power2.inOut", 
+        transformOrigin: "left center" 
+      });
     }
   };
 
@@ -78,12 +85,18 @@ export default function RealBookUI() {
       const tl = gsap.timeline({
         onComplete: () => {
           setCurrentIndex(prev => prev - 1);
-          gsap.set(flipPageRef.current, { rotateY: -180, display: "none" });
+          gsap.set(flipPageRef.current, { rotateY: -180, display: "none", z: 0 });
           setIsAnimating(false);
         }
       });
-      gsap.set(flipPageRef.current, { display: "block", rotateY: -180 });
-      tl.to(flipPageRef.current, { rotateY: 0, duration: 0.8, ease: "power2.inOut", transformOrigin: "left center" });
+      gsap.set(flipPageRef.current, { display: "block", rotateY: -180, z: 0 });
+      tl.to(flipPageRef.current, { 
+        rotateY: 0, 
+        z: 40, // Smoothie lift
+        duration: 0.9, 
+        ease: "power2.inOut", 
+        transformOrigin: "left center" 
+      });
     }
   };
 
@@ -120,14 +133,17 @@ export default function RealBookUI() {
   return (
     <section className="min-h-screen bg-[#F8FAFC] flex flex-col items-center justify-center p-6 font-inter overflow-hidden relative selection:bg-blue-100">
       
-      {/* BACK TO HOME */}
+      {/* BACK TO HOME - MAGNETIC STYLE */}
       <Link 
         to="/" 
         className="fixed top-8 left-8 flex items-center gap-3 text-slate-400 hover:text-slate-900 transition-all group z-[100]"
       >
-        <div className="w-10 h-10 rounded-full border border-slate-100 flex items-center justify-center group-hover:bg-white group-hover:shadow-xl transition-all">
-          <ArrowLeft size={18} className="group-hover:-translate-x-1 transition-transform" />
-        </div>
+        <motion.div 
+          whileHover={{ x: -2 }}
+          className="w-10 h-10 rounded-full border border-slate-100 flex items-center justify-center group-hover:bg-white group-hover:shadow-xl transition-all"
+        >
+          <ArrowLeft size={18} />
+        </motion.div>
         <span className="text-[10px] font-bold uppercase tracking-[0.2em]">Exit Library</span>
       </Link>
 
@@ -174,7 +190,7 @@ export default function RealBookUI() {
         <button 
           onClick={handlePrev} 
           disabled={currentIndex === 0 || isAnimating}
-          className={`text-[10px] font-bold uppercase tracking-[0.3em] transition-all flex items-center gap-3 ${currentIndex === 0 ? 'opacity-10' : 'text-slate-400 hover:text-slate-900'}`}
+          className={`text-[10px] font-bold uppercase tracking-[0.4em] transition-all flex items-center gap-3 ${currentIndex === 0 ? 'opacity-10' : 'text-slate-400 hover:text-slate-900'}`}
         >
           <ChevronLeft size={18} /> Prev
         </button>
@@ -193,7 +209,7 @@ export default function RealBookUI() {
         <button 
           onClick={handleNext} 
           disabled={currentIndex === bookPages.length - 1 || isAnimating}
-          className={`text-[10px] font-bold uppercase tracking-[0.3em] transition-all flex items-center gap-3 ${currentIndex === bookPages.length - 1 ? 'opacity-10' : 'text-slate-400 hover:text-slate-900'}`}
+          className={`text-[10px] font-bold uppercase tracking-[0.4em] transition-all flex items-center gap-3 ${currentIndex === bookPages.length - 1 ? 'opacity-10' : 'text-slate-400 hover:text-slate-900'}`}
         >
           Next <ChevronRight size={18} />
         </button>
