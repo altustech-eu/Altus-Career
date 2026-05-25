@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
-import LoadingPage from "./components/Pages/Loadingpage";
 
 import Home from "./components/mainHomepages/Home";
 import Footer from "./components/Pages/Footer";
@@ -16,26 +15,18 @@ import DownloadPage from "./components/Pages/Downloadpg";
 
 function AppContent() {
   const location = useLocation();
-  const [isLoading, setIsLoading] = useState(true);
 
-  // Initial App Loader logic
+  // SMOOTHIE FLOW: Scroll to top on every route change
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 2000); // Shows the loading page for 2 seconds
-    return () => clearTimeout(timer);
-  }, []);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [location.pathname]);
 
+  // Determine if Nav/Footer should be hidden
   const hideLayout = ["/Login-page", "/dashboard", "/join-network", "/"].includes(location.pathname);
 
-  // 1. If loading, return ONLY the LoadingPage
-  if (isLoading) {
-    return <LoadingPage />;
-  }
-
-  // 2. If finished loading, return the actual App logic
   return (
     <>
+      {/* Conditionally render Navigation */}
       {!hideLayout && <Navigation2 />}
       
       <div className="min-h-screen bg-slate-50 selection:bg-blue-600 selection:text-white">
@@ -51,6 +42,7 @@ function AppContent() {
         </Routes>
       </div>
 
+      {/* Conditionally render Footer */}
       {!hideLayout && <Footer />}
     </>
   );
