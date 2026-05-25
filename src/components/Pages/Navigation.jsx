@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { ChevronDown, Menu, X, Search, Globe, User, ArrowRight, Sparkles, Send, Command } from "lucide-react";
+import { ChevronDown, Menu, X, Search, Globe, User, ArrowRight, Sparkles, Send, Command, Tag } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 
@@ -45,6 +45,57 @@ export default function Navbar() {
         { name: "Technical Trade", desc: "Mechanical, electrical, and mechatronic paths." },
         { name: "Language Mastery", desc: "Intensive German and English certification." },
         { name: "Visa Support", desc: "Document preparation and embassy coordination." }
+      ]
+    },
+    {
+      category: "Pricing",
+      title: "Investment & Service Packages",
+      isPricing: true, // Special flag for the multi-column layout
+      sections: [
+        {
+          head: "Ausbildung",
+          items: [
+            "Ausbildung with B1", "Ausbildung with German Training", "Healthcare Ausbildung", 
+            "IT Ausbildung", "Retail Ausbildung", "Logistics / Hospitality Ausbildung", 
+            "Ausbildung Pathway via Azerbaijan / Georgia / Belarus", "Direct Germany Ausbildung"
+          ]
+        },
+        {
+          head: "Training",
+          items: [
+            "German A1–B1", "German B2 / Medical German", "Exam Preparation", 
+            "Interview Preparation", "Cross-Cultural Training", "Job Readiness Training", 
+            "Spoken German with Native Speakers"
+          ]
+        },
+        {
+          head: "Studies",
+          items: [
+            "Public University", "Private University", "UG in Germany", "PG in Germany", 
+            "Italy / Europe Study Options", "Twinning Programs", "Pathway Programs"
+          ]
+        },
+        {
+          head: "Jobs",
+          items: [
+            "Jobs with PG", "Nursing Jobs", "Skilled Jobs", "Post-Study Work Permit", 
+            "Job Search Support", "CV / LinkedIn / Interview Support"
+          ]
+        },
+        {
+          head: "Visa & Documentation",
+          items: [
+            "Visa File Preparation", "SOP / Motivation Letter", "Embassy Appointment", 
+            "Document Attestation", "Recognition / Anerkennung", "Blocked Account Support", 
+            "Travel / Ticketing", "Pre-Departure Support"
+          ]
+        },
+        {
+          head: "Packages",
+          items: [
+            "Basic", "Standard", "Premium", "Success Plus", "Pay-by-Stage", "EMI / Installment Plans"
+          ]
+        }
       ]
     },
     {
@@ -217,8 +268,8 @@ export default function Navbar() {
                       className="fixed left-0 right-0 top-14 bg-white border-b border-gray-200 shadow-2xl z-[100] overflow-hidden"
                       onClick={(e) => e.stopPropagation()}
                     >
-                      <div className="max-w-[1440px] mx-auto flex h-[380px]">
-                        <div className="w-[260px] bg-[#ffffff] py-6 px-0 border-r border-gray-100 flex flex-col">
+                      <div className="max-w-[1440px] mx-auto flex h-fit min-h-[420px]">
+                        <div className="w-[260px] bg-[#ffffff] py-6 px-0 border-r border-gray-100 flex flex-col shrink-0">
                           <h3 className="text-[11px] font-bold uppercase tracking-widest text-gray-500 mb-4 px-8">Explore</h3>
                           <ul className="space-y-0 flex-1">
                             {megaMenuData.map(cat => (
@@ -238,19 +289,41 @@ export default function Navbar() {
                           </div>
                         </div>
 
-                        <div className="flex-1 bg-white p-10 flex flex-col overflow-y-auto no-scrollbar">
+                        <div className="flex-1 bg-white p-10 flex flex-col overflow-y-auto no-scrollbar max-h-[85vh]">
                           <div className="mb-8 flex items-center gap-3">
                             <h2 className="text-[28px] font-light text-[#0f62fe] leading-tight">{item.title}</h2>
-                            <ArrowRight size={24} strokeWidth={1.5} className="text-[#0f62fe]" />
+                            {item.category === "Pricing" && <Tag size={22} className="text-[#0f62fe] opacity-30" />}
                           </div>
-                          <div className="grid grid-cols-3 gap-x-12 gap-y-10">
-                            {item.links.map(link => (
-                              <div key={link.name} className="group/link cursor-pointer max-w-sm">
-                                <h4 className="text-[15px] font-semibold text-gray-900 group-hover/link:text-[#0f62fe] group-hover/link:underline transition-colors decoration-1 underline-offset-4">{link.name}</h4>
-                                <p className="text-[13px] text-gray-500 mt-1.5 leading-relaxed font-normal">{link.desc}</p>
-                              </div>
-                            ))}
-                          </div>
+
+                          {/* DYNAMIC PRICING GRID */}
+                          {item.isPricing ? (
+                             <div className="grid grid-cols-2 xl:grid-cols-3 gap-x-12 gap-y-12">
+                                {item.sections.map((section) => (
+                                  <div key={section.head} className="space-y-4">
+                                    <h4 className="text-[12px] font-bold text-slate-900 uppercase tracking-widest border-b border-slate-100 pb-2 flex items-center gap-2">
+                                      <div className="w-1.5 h-1.5 bg-[#0f62fe] rounded-full" />
+                                      {section.head}
+                                    </h4>
+                                    <ul className="space-y-2">
+                                      {section.items.map((subLink) => (
+                                        <li key={subLink} className="text-[13px] text-gray-500 hover:text-[#0f62fe] hover:translate-x-1 transition-all cursor-pointer leading-tight">
+                                          {subLink}
+                                        </li>
+                                      ))}
+                                    </ul>
+                                  </div>
+                                ))}
+                             </div>
+                          ) : (
+                            <div className="grid grid-cols-3 gap-x-12 gap-y-10">
+                              {item.links.map(link => (
+                                <div key={link.name} className="group/link cursor-pointer max-w-sm">
+                                  <h4 className="text-[15px] font-semibold text-gray-900 group-hover/link:text-[#0f62fe] group-hover/link:underline transition-colors decoration-1 underline-offset-4">{link.name}</h4>
+                                  <p className="text-[13px] text-gray-500 mt-1.5 leading-relaxed font-normal">{link.desc}</p>
+                                </div>
+                              ))}
+                            </div>
+                          )}
                         </div>
                       </div>
                     </motion.div>
@@ -341,7 +414,7 @@ export default function Navbar() {
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: "calc(100vh - 56px)", opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
-              className="lg:hidden absolute top-14 left-0 w-full bg-white z-[110] overflow-y-auto border-t border-gray-100"
+              className="lg:hidden absolute top-14 left-0 w-full bg-white z-[110] overflow-y-auto border-t border-gray-100 no-scrollbar"
             >
               <div className="p-4 space-y-2">
                 {megaMenuData.map((item) => (
@@ -368,16 +441,32 @@ export default function Navbar() {
                           <div className="p-4 space-y-6">
                             <div className="flex items-center justify-between border-b border-gray-200 pb-3">
                               <h4 className="text-[18px] font-light text-[#0f62fe]">{item.title}</h4>
-                              <ArrowRight size={18} className="text-[#0f62fe]" />
                             </div>
-                            <div className="grid gap-6">
-                              {item.links.map(link => (
-                                <div key={link.name}>
-                                  <h5 className="text-[14px] font-bold text-gray-900 mb-1">{link.name}</h5>
-                                  <p className="text-[12px] text-gray-500 leading-snug">{link.desc}</p>
-                                </div>
-                              ))}
-                            </div>
+
+                            {/* MOBILE PRICING VIEW */}
+                            {item.isPricing ? (
+                               <div className="space-y-8">
+                                  {item.sections.map((section) => (
+                                    <div key={section.head}>
+                                      <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-3">{section.head}</p>
+                                      <div className="grid gap-2">
+                                        {section.items.map((subItem) => (
+                                          <p key={subItem} className="text-[13px] text-gray-700 font-medium pl-2 border-l border-slate-200">{subItem}</p>
+                                        ))}
+                                      </div>
+                                    </div>
+                                  ))}
+                               </div>
+                            ) : (
+                              <div className="grid gap-6">
+                                {item.links.map(link => (
+                                  <div key={link.name}>
+                                    <h5 className="text-[14px] font-bold text-gray-900 mb-1">{link.name}</h5>
+                                    <p className="text-[12px] text-gray-500 leading-snug">{link.desc}</p>
+                                  </div>
+                                ))}
+                              </div>
+                            )}
                           </div>
                         </motion.div>
                       )}
