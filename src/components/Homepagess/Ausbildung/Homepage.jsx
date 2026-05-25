@@ -197,16 +197,16 @@ export default function AusbildungStudyfeeds() {
 
             {/* Desktop Nav Items */}
             <nav className="hidden md:flex items-center gap-6 text-[14px] font-medium text-gray-600">
-              <a href="#" className="hover:text-gray-900 transition-colors">Why us?</a>
-              <a href="#" className="hover:text-gray-900 transition-colors">How it works</a>
-              <a href="#" className="hover:text-gray-900 transition-colors">Resources</a>
-              <a href="#" className="text-gray-900 font-semibold border-b-2 border-blue-600 py-5">Service Providers</a>
+              <a href="/" className="hover:text-gray-900 transition-colors">Why us?</a>
+              <a href="/" className="hover:text-gray-900 transition-colors">How it works</a>
+              <a href="/" className="hover:text-gray-900 transition-colors">Resources</a>
+              <a href="/" className="text-gray-900 font-semibold border-b-2 border-blue-600 py-5">Service Providers</a>
             </nav>
           </div>
 
           {/* Right Header CTAs */}
           <div className="flex items-center gap-4">
-            <a href="#" className="hidden sm:block text-[14px] font-medium text-gray-600 hover:text-gray-900">Sign in</a>
+            <a href="/" className="hidden sm:block text-[14px] font-medium text-gray-600 hover:text-gray-900">Sign in</a>
             <button className="bg-blue-600 hover:bg-blue-700 text-white text-[14px] font-medium px-5 py-2 rounded-md shadow-sm transition-all">
               Get Started
             </button>
@@ -221,7 +221,7 @@ export default function AusbildungStudyfeeds() {
           <nav className="flex items-center gap-2 text-[13px] font-medium text-gray-500 mb-6">
             <a href="/" className="hover:text-blue-600 flex items-center gap-1"><Home size={14} /> Home</a>
             <ChevronRight size={14} className="text-gray-300" />
-            <a href="#" className="hover:text-blue-600">Marketplace</a>
+            <a href="/" className="hover:text-blue-600">Marketplace</a>
             <ChevronRight size={14} className="text-gray-300" />
             <span className="text-gray-900">Service providers</span>
           </nav>
