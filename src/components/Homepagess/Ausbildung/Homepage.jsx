@@ -565,30 +565,32 @@ export default function AusbildungStudyfeeds() {
             <div>
               <h4 className="text-gray-200 font-bold mb-5 text-[15px]">About</h4>
               <ul className="space-y-4 text-[14px] text-gray-400 font-medium">
-                <li><a href="#" className="hover:text-white transition-colors">Program overview</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Success stories</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Press & Media</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Careers</a></li>
+                <li><a href="/" className="hover:text-white transition-colors">Program overview</a></li>
+                <li><a href="/" className="hover:text-white transition-colors">Success stories</a></li>
+                <li><a href="/" className="hover:text-white transition-colors">Press & Media</a></li>
+                <li><a href="/" className="hover:text-white transition-colors">Careers</a></li>
               </ul>
             </div>
 
+
             <div>
+
               <h4 className="text-gray-200 font-bold mb-5 text-[15px]">Resources</h4>
               <ul className="space-y-4 text-[14px] text-gray-400 font-medium">
-                <li><a href="#" className="hover:text-white transition-colors">Knowledge Base</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Company Setup Guide</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">API Documentation</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Brand Assets</a></li>
+                <li><a href="/" className="hover:text-white transition-colors">Knowledge Base</a></li>
+                <li><a href="/" className="hover:text-white transition-colors">Company Setup Guide</a></li>
+                <li><a href="/" className="hover:text-white transition-colors">API Documentation</a></li>
+                <li><a href="/" className="hover:text-white transition-colors">Brand Assets</a></li>
               </ul>
             </div>
 
             <div>
               <h4 className="text-gray-200 font-bold mb-5 text-[15px]">Policies & Support</h4>
               <ul className="space-y-4 text-[14px] text-gray-400 font-medium">
-                <li><a href="#" className="hover:text-white transition-colors">Help Center</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Contact Support</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Terms of Service</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Privacy Policy</a></li>
+                <li><a href="/" className="hover:text-white transition-colors">Help Center</a></li>
+                <li><a href="/" className="hover:text-white transition-colors">Contact Support</a></li>
+                <li><a href="/" className="hover:text-white transition-colors">Terms of Service</a></li>
+                <li><a href="/" className="hover:text-white transition-colors">Privacy Policy</a></li>
               </ul>
             </div>
           </div>
@@ -598,10 +600,10 @@ export default function AusbildungStudyfeeds() {
               &copy; {new Date().getFullYear()} Republic of Innovation Marketplace. All rights reserved.
             </p>
             <div className="flex gap-4">
-              <a href="#" className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-gray-700 hover:text-white transition-colors">
+              <a href="/" className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-gray-700 hover:text-white transition-colors">
                 <Globe size={18} />
               </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-gray-700 hover:text-white transition-colors">
+              <a href="/" className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-gray-700 hover:text-white transition-colors">
                 <ShieldCheck size={18} />
               </a>
             </div>
